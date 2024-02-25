@@ -2,8 +2,6 @@ FROM golang:1.22.0
 
 RUN useradd -m -s /bin/bash app && \
     apt update && \
-    apt install -y git sqlite3 && \
-    apt clean && \
     mv /usr/local/go /home/app/go
 
 ENV GOPATH=/home/app/go

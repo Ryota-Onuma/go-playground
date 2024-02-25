@@ -8,6 +8,10 @@ import (
 )
 
 func main() {
+	playContext()
+}
+
+func playContext() {
 	playCancel()
 	playWithTimeout()
 	playWithDeadline()
