@@ -1,4 +1,4 @@
-package context
+package main
 
 import (
 	"context"
@@ -14,7 +14,7 @@ type RoleKeyType struct{}
 var UserIDKey = UserIDKeyType{}
 var RoleKey = RoleKeyType{}
 
-func RunCounter(ctx context.Context, index int) {
+func runCounter(ctx context.Context, index int) {
 	checkDeadLine(ctx)
 	checkValue(ctx)
 	go echoHelloWorld(ctx, index+3)

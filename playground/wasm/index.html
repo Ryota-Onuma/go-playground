@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Go WebAssembly</title>
+</head>
+
+<body>
+    <h1>Go WebAssembly</h1>
+
+    <script src="./wasm_exec.js"></script>
+
+    <script>
+        const go = new Go();
+        WebAssembly.instantiateStreaming(fetch("markdown-to-html.wasm"), go.importObject).then((result) => {
+            const module = result.module;
+            const instance = result.instance;
+            go.run(instance);
+            document.getElementById("convert-markdown").disabled = false;
+        });
+
+        function convert() {
+            const inputElement = document.getElementById('input');
+            const outputElement = document.getElementById('output');
+
+            const inputText = inputElement.value;
+
+            // wasmのmarkdownToHtmlを呼び出している
+            const outputText = markdownToHtml(inputText)
+
+            outputElement.innerHTML = outputText;
+        }
+    </script>
+
+    <div>
+        <textarea id="input" placeholder="Enter text" rows="5" cols="50"></textarea>
+        <button onClick="convert();" id="convert-markdown" disabled>Convert Markdown</button>
+    </div>
+    <div>
+        <p>Output:</p>
+        <span id="output"></span>
+    </div>
+</body>
+</html>
