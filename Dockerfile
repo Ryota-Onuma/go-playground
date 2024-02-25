@@ -1,14 +1,21 @@
 FROM golang:1.22.0
 
 RUN useradd -m -s /bin/bash app && \
-    apt-get update && \
-    apt-get install -y git && \
-    apt-get clean
+    apt update && \
+    apt install -y git sqlite3 && \
+    apt clean && \
+    mv /usr/local/go /home/app/go
+
+ENV GOPATH=/home/app/go
+ENV GOBIN=$GOPATH/bin
+ENV PATH=$PATH:$GOBIN
+
+RUN chown -R -v app:app /home/app
 
 USER app
 
-WORKDIR /home/app
+WORKDIR /home/app/workspace
 
-COPY . .
+COPY --chown=app:app . .
 
-CMD ["go", "run", "src/main.go"]
+CMD ["go", "run", "playground/main.go"]
