@@ -1,4 +1,4 @@
-FROM golang:1.22.0
+FROM golang:1.22.3-bullseye
 
 RUN useradd -m -s /bin/bash app && \
     apt update && \
