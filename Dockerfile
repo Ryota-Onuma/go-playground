@@ -4,9 +4,7 @@ RUN useradd -m -s /bin/bash app && \
     apt update && \
     mv /usr/local/go /home/app/go
 
-ENV GOPATH=/home/app/go
-ENV GOBIN=$GOPATH/bin
-ENV PATH=$PATH:$GOBIN
+ENV PATH=$PATH:/home/app/go/bin
 
 RUN chown -R -v app:app /home/app
 
